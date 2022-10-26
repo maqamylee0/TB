@@ -1,11 +1,11 @@
 import './App.css';
 import Header from './components/Header';
-import RegistrationForm from './components/Register';
+import LoginForm from './components/Login';
 
 function App() {
   return ( <div>
    <Header/>
-   <RegistrationForm/>
+   <LoginForm/>
   </div>
   
   );
