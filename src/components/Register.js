@@ -26,12 +26,12 @@ function Register() {
 
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Your Name' id='form1' type='text' className='w-100'/>
+                <MDBInput label='Name' id='form1' type='text' className='w-100'/>
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <MDBIcon fas icon="lock me-3" size='lg'/>
-                <MDBInput label='NIN' id='form3' type='text'/>
+                <MDBInput label='Nin' id='form2' type='text'/>
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
@@ -50,8 +50,7 @@ function Register() {
             </MDBCol>
 
             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-              <MDBCardImage src="require('@/assets/cover.jpg')"alt="Card image cap" />
-
+              <MDBCardImage src="https://t4.ftcdn.net/jpg/02/73/87/77/240_F_273877701_Q7wFeIORNw6MTXaLYIy81yX9iiNeKgtb.jpg" />
             </MDBCol>
 
           </MDBRow>
