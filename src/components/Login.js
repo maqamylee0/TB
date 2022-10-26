@@ -1,5 +1,6 @@
 import React from 'react';
-import {useRef,useEffect,useState} from 'react'
+import {useRef,useEffect,useState,useContext} from 'react'
+import AuthContext from '../context/AuthProvider';
 import {
   MDBBtn,
   MDBContainer,
@@ -13,8 +14,10 @@ import {
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-
+import axios from '../api/axios';
+const LoginURL = '/auth';
 function Login() {
+  const {setAuth} = useContext(AuthContext)
   const userRef  = useRef()
   const errRef = useRef()
 
@@ -34,6 +37,33 @@ function Login() {
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
+   try{
+    const response = await axios.post(LoginURL,JSON.stringify({nin,pwd}),{
+      headers : {'Content-Type': 'application/json'},
+      withCredentials: true
+    });
+    console.log(JSON.stringify(response?.data))
+    const accessToken = response?.data?.access_token
+    setAuth(user,pwd,nin,accessToken)
+    setUser('')
+    setPwd('')
+    setNin('')
+     
+   }catch(err) {
+    if(!err?.response){
+      setErrMsg("No server response")
+    } else if(err.required?.status === 400){
+      setErrMsg("Missing Username or Password")
+    } else if(err.required?.status === 401){
+      setErrMsg("Unauthorized access")
+    } else{
+      setErrMsg("Login Failed")
+    } 
+    errRef.current.focus()
+
+   }
+
+
 
   }
   return (
@@ -83,7 +113,7 @@ function Login() {
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
               </div>
 
-              <MDBBtn className='mb-4' size='lg'>Sign In</MDBBtn>
+              <MDBBtn type='submit' className='mb-4' size='lg'>Sign In</MDBBtn>
 
             </MDBCol>
             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
